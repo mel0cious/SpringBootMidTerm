@@ -1,12 +1,7 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'  // Make sure Jenkins has Maven installed or configured as 'Maven3'
-    }
-
     stages {
-
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
@@ -27,15 +22,14 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
-
     }
 
     post {
         success {
-            echo 'Build completed successfully!'
+            echo '✅ Build completed successfully!'
         }
         failure {
-            echo 'Build failed.'
+            echo '❌ Build failed.'
         }
     }
 }
